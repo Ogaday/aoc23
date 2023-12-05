@@ -6,6 +6,6 @@ if __name__ == "__main__":
     for row in rows:
         data = row.split(":")[1]
         A, B = [set(int(val) for val in part.split()) for part in data.split("|")]
-        if A & B:
-            scores.append(2 ** (len(A & B) - 1))
+        if matches := A & B:
+            scores.append(2 ** (len(matches) - 1))
     print(sum(scores))

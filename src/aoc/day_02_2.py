@@ -43,11 +43,15 @@ CONSTRAINTS = {"red": 12, "green": 13, "blue": 15}
 
 
 def find_min_cubes(game):
-    return {colour: max(getattr(round_, colour) for round_ in game.rounds) for colour in COLOURS}
+    return {
+        colour: max(getattr(round_, colour) for round_ in game.rounds)
+        for colour in COLOURS
+    }
 
 
 def power(round_: Round):
     return round_.red * round_.blue * round_.green
+
 
 if __name__ == "__main__":
     games = parse_input("inputs/day_02.txt")

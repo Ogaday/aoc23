@@ -1,6 +1,5 @@
 from string import digits
 
-
 replacements = {
     "one": "1",
     "two": "2",

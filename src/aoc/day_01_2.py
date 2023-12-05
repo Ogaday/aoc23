@@ -13,14 +13,23 @@ replacements = {
     "nine": "9",
 }
 
-def apply_substitutions(row, map):
-    for old, new in map.items():
-        row = row.replace(old, new)
-    return row
 
 def get_calibration_value(row: str) -> int:
-    numbers = [char for char in row if char in digits]
-    return int(numbers[0] + numbers[-1])
+    values = parse_row(row)
+    return int(values[0] + values[-1])
+
+
+def parse_row(row: str) -> list[str]:
+    values = []
+    for i in range(len(row)):
+        if row[i] in digits:
+            values.append(row[i])
+        else:
+            for key, value in replacements.items():
+                if row[i:].startswith(key):
+                    values.append(value)
+                    break
+    return values
 
 
 def solution(path) -> int:
@@ -28,7 +37,7 @@ def solution(path) -> int:
     >>> solution
     """
     with open(path) as f:
-        solution = sum(get_calibration_value(apply_substitutions(line.strip(), map=replacements)) for line in f.readlines())
+        solution = sum(get_calibration_value(line.strip()) for line in f.readlines())
     return solution
 
 

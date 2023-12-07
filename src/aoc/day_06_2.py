@@ -1,4 +1,3 @@
-from functools import reduce
 import math
 
 
@@ -7,12 +6,12 @@ class ImaginaryRootsError(Exception):
 
 
 def quadratic(a: int, b: int, c: int) -> tuple[float, float]:
-    discriminant = b ** 2 - 4 * a * c
+    discriminant = b**2 - 4 * a * c
     if discriminant < 0:
         raise ImaginaryRootsError(f"Quadratic {a}x^2 + {b}x + {c} has no real roots.")
     return (
         (-b + math.sqrt(b**2 - 4 * a * c)) / (2 * a),
-        (-b - math.sqrt(b**2 - 4 * a * c)) / (2 * a)
+        (-b - math.sqrt(b**2 - 4 * a * c)) / (2 * a),
     )
 
 
@@ -22,7 +21,7 @@ def winning_times(time: int, distance) -> int:
         min_seconds += 1
     if (max_seconds := math.floor(ub)) == ub:
         max_seconds -= 1
-        
+
     return max_seconds - min_seconds + 1
 
 

@@ -1,6 +1,5 @@
-
 from itertools import cycle
-
+import math
 
 if __name__ == "__main__":
     graph = {}
@@ -12,12 +11,20 @@ if __name__ == "__main__":
             left, right = [node.strip(")").strip("(") for node in adjacents.split(", ")]
             graph[node] = left, right
     nodes = [node for node in graph if node.endswith("A")]
-    steps = 0
+    solutions = {node: [] for node in nodes}
     directions = {"L": 0, "R": 1}
-    for inst in cycle(instructions):
-        for i, node in enumerate(nodes):
-            nodes[i] = graph[node][directions[inst]]
-        steps += 1
-        if all(node.endswith("Z") for node in nodes):
-            break
-    print(steps)
+    for initial_node in nodes:
+        print(f"starting at {initial_node}")
+        node = initial_node
+        seen = set()
+        for steps, (i, inst) in enumerate(cycle(enumerate(instructions))):
+            if i == 0:
+                print("starting...")
+            node = graph[node][directions[inst]]
+            if node.endswith("Z"):
+                print(f"found {node}")
+                solutions[initial_node].append(steps + 1)
+            if (node, i) in seen:
+                break
+            seen.add((node, i))
+    print(math.lcm(*[sol[0] for sol in solutions.values()]))

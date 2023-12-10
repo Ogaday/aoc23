@@ -1,6 +1,4 @@
-
 from itertools import cycle
-
 
 if __name__ == "__main__":
     graph = {}
@@ -11,7 +9,7 @@ if __name__ == "__main__":
             node, adjacents = line.strip().split(" = ")
             left, right = [node.strip(")").strip("(") for node in adjacents.split(", ")]
             graph[node] = left, right
-    steps = ['AAA']
+    steps = ["AAA"]
     directions = {"L": 0, "R": 1}
     for inst in cycle(instructions):
         steps.append(graph[steps[-1]][directions[inst]])

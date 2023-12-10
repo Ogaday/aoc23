@@ -1,5 +1,5 @@
-from itertools import cycle
 import math
+from itertools import cycle
 
 if __name__ == "__main__":
     graph = {}
